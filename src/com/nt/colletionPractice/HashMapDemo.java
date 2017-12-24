@@ -13,7 +13,7 @@ public class HashMapDemo {
 	//	FileInputStream fis = new FileInputStream(
 	//			"C:\\Users\\B.Prasad\\git\\VenApp\\src\\com\\app\\properties\\abc.properties");
 	
-		InputStream is=Thread.currentThread().getContextClassLoader().getResourceAsStream("abc.properties");
+		InputStream is=Thread.currentThread().getContextClassLoader().getResourceAsStream("com/app/properties/abc.properties");
 		System.out.println(is);
 		p.load(is);
 		System.out.println(p);
