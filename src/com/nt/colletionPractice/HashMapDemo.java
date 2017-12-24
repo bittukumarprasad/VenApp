@@ -3,6 +3,7 @@ package com.nt.colletionPractice;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 public class HashMapDemo {
@@ -12,10 +13,9 @@ public class HashMapDemo {
 	//	FileInputStream fis = new FileInputStream(
 	//			"C:\\Users\\B.Prasad\\git\\VenApp\\src\\com\\app\\properties\\abc.properties");
 	
-		FileInputStream fis = new FileInputStream(
-					"C:\\Users\\B.Prasad\\git\\VenApp\\src\\com\\app\\properties\\abc.properties");
-		
-		p.load(fis);
+		InputStream is=Thread.currentThread().getContextClassLoader().getResourceAsStream("abc.properties");
+		System.out.println(is);
+		p.load(is);
 		System.out.println(p);
 	}
 
