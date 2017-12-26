@@ -10,12 +10,12 @@ public class HashMapDemo {
 
 	public static void main(String[] args) throws IOException {
 		Properties p = new Properties();
-	//	FileInputStream fis = new FileInputStream(
-	//			"C:\\Users\\B.Prasad\\git\\VenApp\\src\\com\\app\\properties\\abc.properties");
+		FileInputStream fis = new FileInputStream(
+			"C:\\Users\\Jaydev\\git\\VenApp\\src\\com\\app\\properties\\abc.properties");
 	
-		InputStream is=Thread.currentThread().getContextClassLoader().getResourceAsStream("com/app/properties/abc.properties");
-		System.out.println(is);
-		p.load(is);
+		//InputStream is=Thread.currentThread().getContextClassLoader().getResourceAsStream("com/app/properties/abc.properties");
+		System.out.println(fis);
+		p.load(fis);
 		System.out.println(p);
 	}
 
