@@ -1,0 +1,21 @@
+ <!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.nt.domain.User" table="user_table">
+
+		<id name="eid">
+<!-- 			<generator class="increment" /> -->
+		</id>
+		<property name="userid" />
+		<property name="FirstName" />
+		<property name="LastName"/>
+		<property name="addrs"/>
+		<set name="phones" cascade="all" lazy="extra">
+		<key column="unid"/>
+		<one-to-many class="com.nt.domain.PhoneNumbers"/>
+		</set>
+
+	</class>
+</hibernate-mapping>
