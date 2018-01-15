@@ -10,7 +10,7 @@
 		<property name="LastName"/>
 		<property name="addrs"/>
 		
-		<set name="phones" cascade="all">
+		<set name="phones" cascade="all-delete-orphan">
 		<key column="unid"/>
 		<one-to-many class="com.nt.domain.PhoneNumbers"/>
 		</set>

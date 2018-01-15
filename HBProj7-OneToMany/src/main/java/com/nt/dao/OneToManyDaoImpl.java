@@ -1,5 +1,6 @@
 package com.nt.dao;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.hibernate.Session;
@@ -11,7 +12,7 @@ import com.nt.utility.HibernateUtil;
 
 public class OneToManyDaoImpl implements OneToManyIDao {
 
-/*	@Override
+	@Override
 	public void saveObject() {
 		Session ses = null;
 		Transaction tx = null;
@@ -57,7 +58,7 @@ public class OneToManyDaoImpl implements OneToManyIDao {
 
 		}
 
-	}*/
+	}
 
 	@Override
 	public void deleteChild() {
@@ -70,12 +71,18 @@ public class OneToManyDaoImpl implements OneToManyIDao {
 		ses = HibernateUtil.getSession();
 
 		// ====Load the Parent=======//
-		user = ses.get(User.class, 1001);
+		user =(User)ses.get(User.class,1001);
 		// ===get the Childs=====//
+		try{
 	           pnr =user.getPhones();
-
-		// get the child object
-		phn = ses.get(PhoneNumbers.class,88888);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		// get the particular child object
+		phn = (PhoneNumbers)ses.get(PhoneNumbers.class,(long)9999999);
+		System.out.println(phn);
+		System.out.println(pnr);
        try{
     	   tx=ses.beginTransaction();
             pnr.remove(phn);

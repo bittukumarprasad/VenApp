@@ -12,7 +12,9 @@ public class ClientApp {
 	
 		//==========Create the DaoImpl object===========//
 		dao=OneToManyFactory.getInstance();
-		dao.deleteChild();
+		//dao.saveObject();
+         dao.deleteChild();
+
 		//=======Close the Session & SessionFactory()=======//
 		HibernateUtil.closeSession();
 		HibernateUtil.closeSessionFactory();
