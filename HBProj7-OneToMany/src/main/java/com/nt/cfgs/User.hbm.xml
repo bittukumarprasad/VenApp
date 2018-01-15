@@ -5,17 +5,14 @@
 <hibernate-mapping>
 	<class name="com.nt.domain.User" table="user_table">
 
-		<id name="eid">
-<!-- 			<generator class="increment" /> -->
-		</id>
-		<property name="userid" />
+		<id name="userid" />
 		<property name="FirstName" />
 		<property name="LastName"/>
 		<property name="addrs"/>
-		<set name="phones" cascade="all" lazy="extra">
+		
+		<set name="phones" cascade="all">
 		<key column="unid"/>
 		<one-to-many class="com.nt.domain.PhoneNumbers"/>
 		</set>
-
 	</class>
 </hibernate-mapping>

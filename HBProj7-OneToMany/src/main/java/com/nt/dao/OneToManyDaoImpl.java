@@ -1,6 +1,5 @@
 package com.nt.dao;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import org.hibernate.Session;
@@ -8,58 +7,86 @@ import org.hibernate.Transaction;
 
 import com.nt.domain.PhoneNumbers;
 import com.nt.domain.User;
-import com.nt.utility.HibernateUtility;
+import com.nt.utility.HibernateUtil;
 
 public class OneToManyDaoImpl implements OneToManyIDao {
 
-	@Override
-	public String saveObject() {
-		Session ses=null;
-		Transaction tx=null;
-		User user=null;
-		PhoneNumbers pnr1,pnr2=null;
-		//=====create thye Session===========//
-		ses=HibernateUtility.getSession();
-		
-		//=======create the user Objcet======//
-		user=new User();
+/*	@Override
+	public void saveObject() {
+		Session ses = null;
+		Transaction tx = null;
+		User user = null;
+		PhoneNumbers pnr1, pnr2 = null;
+		// =====create thye Session===========//
+		ses = HibernateUtil.getSession();
+
+		// =======create the user Objcet======//
+		user = new User();
 		user.setUserid(1001);
 		user.setFirstName("jayadeba");
 		user.setLastName("jena");
 		user.setAddrs("bbsr");
-		
-		//========Create PhoneNumber class=====//
-		pnr1=new PhoneNumbers();
+
+		// ========Create PhoneNumber class=====//
+		pnr1 = new PhoneNumbers();
 		pnr1.setPhone(9999999);
 		pnr1.setNumbertype("persinal");
 		pnr1.setProvider("Airtel");
-		
-		pnr2=new PhoneNumbers();
-		pnr2.setPhone(9999999);
-		pnr2.setNumbertype("persinal");
-		pnr2.setProvider("Airtel");
-		
-		//==========Add The number into the Set=====//
-		Set<PhoneNumbers> set=new HashSet();
+
+		pnr2 = new PhoneNumbers();
+		pnr2.setPhone(88888);
+		pnr2.setNumbertype("office");
+		pnr2.setProvider("Aircel");
+
+		// ==========Add The number into the Set=====//
+		Set<PhoneNumbers> set = new HashSet();
 		set.add(pnr1);
 		set.add(pnr2);
-		//============aad the Set to the User======//
+		// ============aad the Set to the User======//
 		user.setPhones(set);
-		
-		
-	//==========save the Object in Trasaction environment========//
-		try{
-		tx=ses.beginTransaction();
-		ses.save(user);
-		tx.commit();
-		return "Object Saved!!!";
-		}
-		catch(Exception e){
-			
+
+		// ==========save the Object in Trasaction environment========//
+		try {
+			tx = ses.beginTransaction();
+			ses.save(user);
+			tx.commit();
+			System.out.println("object Saved");
+		} catch (Exception e) {
+
 			tx.rollback();
-			
+
 		}
-		return null;
+
+	}*/
+
+	@Override
+	public void deleteChild() {
+		Session ses = null;
+		Transaction tx = null;
+		PhoneNumbers phn = null;
+		 Set<PhoneNumbers> pnr = null;
+		User user = null;
+		// ========get the Session==========//
+		ses = HibernateUtil.getSession();
+
+		// ====Load the Parent=======//
+		user = ses.get(User.class, 1001);
+		// ===get the Childs=====//
+	           pnr =user.getPhones();
+
+		// get the child object
+		phn = ses.get(PhoneNumbers.class,88888);
+       try{
+    	   tx=ses.beginTransaction();
+            pnr.remove(phn);
+    	   tx.commit();
+    	   System.out.println("Child Object Deleted");
+       }
+       catch(Exception e)
+       {
+    	   tx.rollback();
+       }
+       
 	}
 
 }
